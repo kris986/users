@@ -2,7 +2,7 @@
 
 import requests
 from set_urls import go_to_url
-from set_urls import REGISTER_PATH as register_path
+from set_urls import DOREGISTER as register_path
 from datetime import datetime
 
 
