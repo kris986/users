@@ -1,4 +1,3 @@
-from urllib.parse import urljoin
 UI_URL = 'http://users.bugred.ru/'
 URL_LIST = 'http://users.bugred.ru/tasks/rest/list'
 API_URL = 'http://users.bugred.ru/tasks/rest/'
@@ -13,8 +12,3 @@ DELETE_USER = 'deleteuser'
 FULL_UPDATE_USER = 'fullupdateuser'
 DO_LOGIN = 'dologin'
 GET_USER = 'getuser'
-
-
-def go_to_url(url=API_URL, method=None):
-    method_url = urljoin(url, method)
-    return method_url
