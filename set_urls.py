@@ -15,6 +15,4 @@ DO_LOGIN = 'dologin'
 GET_USER = 'getuser'
 
 
-def go_to_url(method):
-    method_url = urljoin(API_URL, method)
-    return method_url
+
