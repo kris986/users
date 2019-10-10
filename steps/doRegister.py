@@ -10,14 +10,14 @@ class DoRegister:
 
     @staticmethod
     def create_new_user():
-        now = datetime.now().strftime("%d.%m.%Y-%H-%M-%S")
+        now = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%MS-%f")
         email = now + '@test.test'
         name = 'User_' + now
         password = '1234567'
         return email, name, password
 
     def do_register(self, email, name, password):
-        url_method = go_to_url(register_path)
+        url_method = go_to_url(method=register_path)
         new_user_params = {
             "email": email,
             "name": name,

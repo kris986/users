@@ -19,7 +19,7 @@ class CreateCompany:
         return company_name, company_type, email_owner
 
     def create_company(self, company_name, company_type, email_owner):
-        url_method = go_to_url(create_company_path)
+        url_method = go_to_url(method=create_company_path)
         new_company_params = {
             "company_name": company_name,
             "company_type": company_type,
