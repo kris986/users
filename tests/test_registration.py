@@ -6,24 +6,29 @@ from ..set_urls import DOREGISTER
 
 class TestRegistration:
     registration = Registration(DOREGISTER)
+    gen_unique_part = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f")
+    user_email = f'{gen_unique_part}@test.test'
+    user_name = f'Name-{gen_unique_part}'
+    password = f'PASS{gen_unique_part}'
 
     def test_rgstrtn_valid_data(self):
-        gen_unique_part = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f")
-        user_email = f'{gen_unique_part}@test.test'
-        user_name = f'Name-{gen_unique_part}'
-        password = f'PASS{gen_unique_part}'
-        response = self.registration.sent_registration_request(email=user_email, password=password, name=user_name)
+        response = self.registration.sent_registration_request(email=self.user_email, password=self.password,
+                                                               name=self.user_name)
         self.registration.should_be_status_code_200(response)
-        self.registration.should_be_requare_fields_response_body(response, user_email, user_name)
+        self.registration.should_be_requare_fields_response_body(response, self.user_email, self.user_name)
 
     def test_double_email(self):
-        pass
-    # 200 OK
-    # {
-    #     "type": "error",
-    #     "message": " email 11.08.2019-23-06-59@test.test уже есть в базе"
-    # }
-
+        user_email_for_reuse = self.user_email
+        response = self.registration.sent_registration_request(email=user_email_for_reuse,
+                                                               password=self.password,
+                                                               name=self.user_name)
+        self.registration.should_be_status_code_200(response)
+        self.registration.should_be_requare_fields_response_body(response, self.user_email, self.user_name)
+        response_non_unique_email = self.registration.sent_registration_request(email=user_email_for_reuse,
+                                                                                password=self.password,
+                                                                                name=self.user_name)
+        self.registration.should_be_status_code_200(response_non_unique_email)
+        self.registration.should_be_error_msg_non_unique_field(response_non_unique_email, user_email_for_reuse)
 
     def test_non_unique_user_name(self):
         pass
