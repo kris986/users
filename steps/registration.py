@@ -29,3 +29,15 @@ class Registration(BaseMethod):
         #     "date_start": 0,
         #     "hobby": ""
         # }
+
+    def should_be_requare_fields_response_body(self, response, posted_user_email, posted_user_name):
+        response_result = json.loads(response.text)
+        assert response_result['name'] == posted_user_name, 'Name of new user IS NOT correct'
+        assert response_result[
+                   'avatar'] == 'http://users.bugred.ru//tmp/default_avatar.jpg', 'Name of new user IS NOT correct'
+        assert response_result['password'] is not None, 'Name of new user IS NOT correct'
+        assert response_result['birthday'] == 0, 'Name of new user IS NOT correct'
+        assert response_result['email'] == posted_user_email, 'Name of new user IS NOT correct'
+        assert response_result['gender'] == '', 'Name of new user IS NOT correct'
+        assert response_result['date_start'] == 0, 'Name of new user IS NOT correct'
+        assert response_result['hobby'] == '', 'Name of new user IS NOT correct'
