@@ -18,5 +18,6 @@ class Login(BaseMethod):
         response_result = json.loads(response_data.text)
         assert response_result['result'] is True, 'Result of response IS NOT "true"'
 
-    def login_with_valid_credentials(self, user_name, password):
-        pass
+    def should_be_text_result_false(self, response_data):
+        response_result = json.loads(response_data.text)
+        assert response_result['result'] is False, 'Result of response IS NOT "false"'
