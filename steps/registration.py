@@ -29,3 +29,26 @@ class Registration(BaseMethod):
         #     "date_start": 0,
         #     "hobby": ""
         # }
+
+    def should_be_requare_fields_response_body(self, response, posted_user_email, posted_user_name):
+        response_result = json.loads(response.text)
+        assert response_result['name'] == posted_user_name, 'Name of new user IS NOT correct'
+        assert response_result[
+                   'avatar'] == 'http://users.bugred.ru//tmp/default_avatar.jpg', 'Name of new user IS NOT correct'
+        assert response_result['password'] is not None, 'Name of new user IS NOT correct'
+        assert response_result['birthday'] == 0, 'Name of new user IS NOT correct'
+        assert response_result['email'] == posted_user_email, 'Name of new user IS NOT correct'
+        assert response_result['gender'] == '', 'Name of new user IS NOT correct'
+        assert response_result['date_start'] == 0, 'Name of new user IS NOT correct'
+        assert response_result['hobby'] == '', 'Name of new user IS NOT correct'
+
+    def should_be_error_msg_non_unique_field(self, response, non_unique_field):
+        response_result = json.loads(response.text)
+        assert 'type' in response_result, 'There is not requared type field'
+        assert response_result['type'] == 'error', 'Error IS NOT arise, but it must'
+        assert non_unique_field in response_result['message'], 'There IS NOT details in the Error message'
+
+        # {
+        #     "type": "error",
+        #     "message": " email 11.08.2019-23-06-59@test.test уже есть в базе"
+        # }

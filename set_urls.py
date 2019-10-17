@@ -1,4 +1,3 @@
-from urllib.parse import urljoin
 UI_URL = 'http://users.bugred.ru/'
 URL_LIST = 'http://users.bugred.ru/tasks/rest/list'
 API_URL = 'http://users.bugred.ru/tasks/rest/'
