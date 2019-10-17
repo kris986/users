@@ -44,6 +44,7 @@ class Registration(BaseMethod):
 
     def should_be_error_msg_non_unique_field(self, response, non_unique_field):
         response_result = json.loads(response.text)
+        assert 'type' in response_result, 'There is not requared type field'
         assert response_result['type'] == 'error', 'Error IS NOT arise, but it must'
         assert non_unique_field in response_result['message'], 'There IS NOT details in the Error message'
 
