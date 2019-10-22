@@ -5,9 +5,6 @@ from ..steps.registration import Registration
 from ..set_urls import DOREGISTER
 
 
-# from ..steps.base_methods import BaseMethod
-
-
 class TestRegistration:
     registration = Registration(DOREGISTER)
     base = BaseMethod(DOREGISTER)
@@ -21,7 +18,7 @@ class TestRegistration:
         self.registration.should_be_requare_fields_response_body(response, user_data['user_email'],
                                                                  user_data['user_name'])
 
-    def test_double_email(self):
+    def test_fail_registration_with_duplicate_email(self):
         user_data = self.base.generator_user_data()
         user_email_for_reuse = user_data['user_email']
         response = self.registration.sent_registration_request(email=user_email_for_reuse,
@@ -37,7 +34,7 @@ class TestRegistration:
         self.registration.should_be_status_code_200(response_non_unique_email)
         self.registration.should_be_error_msg_non_unique_field(response_non_unique_email, user_email_for_reuse)
 
-    def test_non_unique_user_name(self):
+    def test_fail_registration_with_duplicate_user_name(self):
         pass
         # 200 ok
         # {
