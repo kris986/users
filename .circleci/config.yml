@@ -1,79 +1,40 @@
-#version: 2
-#jobs:
-#  tests:
-#    description: "Run tests"
-#    working_directory: ~/users
-#    docker:
-#
-#      - image: circleci/python:3.7.2
-#        environment: # environment variables for primary container
-#          PIPENV_VENV_IN_PROJECT: true
-#    steps:
-#      - checkout
-#      - run: echo "Run tests"
-#      - run: pip install --user --upgrade pip
-#      - run: pip install --user -r requirements.txt
-#      - run:
-#          command: |  # use pipenv to install dependencies
-#            sudo pip install pipenv
-#            pipenv install
-#      - run:
-#          name: run tests
-#          command: |
-#            set -e
-#            .venv/bin/activate
-#            mkdir test-results
-#            pipenv run python run.py test
-#
-#            pytest --junitxml=test-results/junit.xml
-#
-#            - store_test_results:
-#                path: test-results
-#
-#            - store_artifacts:
-#                path: test-results
-#workflows:
-#  version: 2
-#  tests:
-#    jobs:
-#      - tests
-
-version: 2 # use CircleCI 2.0
-jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    # directory where steps are run
+version: 2
+jobs:
+  tests:
+    description: "Run tests"
     working_directory: ~/users
-    docker: # run the steps with Docker
-      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+    docker:
+
       - image: circleci/python:3.7.2
         environment: # environment variables for primary container
           PIPENV_VENV_IN_PROJECT: true
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
+    steps:
+      - checkout
+      - run: echo "Run tests"
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
-      - restore_cache:
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
-          command: |
+          command: |  # use pipenv to install dependencies
             sudo pip install pipenv
             pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.7/site-packages"
       - run:
+          name: run tests
           command: |
-            mkdir test-results
             set -e
+#            .venv/bin/activate
+            mkdir test-results
             pipenv run python run.py test
+
+      #            pytest --junitxml=test-results/junit.xml
+
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-results
           destination: tr1
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - tests
+
