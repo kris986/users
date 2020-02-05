@@ -23,6 +23,8 @@ jobs:
             set -e
             . venv/bin/activate
             mkdir test-results
+            pipenv run python run.py test
+
             pytest --junitxml=test-results/junit.xml
 
             - store_test_results:
