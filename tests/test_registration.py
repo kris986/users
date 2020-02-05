@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from ..steps.base_methods import BaseMethod
-from ..steps.registration import Registration
-from ..set_urls import DOREGISTER
+from .steps.base_methods import BaseMethod
+from .steps.registration import Registration
+from .set_urls import DOREGISTER
 
 
 class TestRegistration:

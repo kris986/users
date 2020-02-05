@@ -2,9 +2,9 @@ from datetime import datetime
 
 import pytest
 
-from ..steps.registration import Registration
-from ..set_urls import DO_LOGIN, DOREGISTER
-from ..steps.login import Login
+from .steps.registration import Registration
+from .set_urls import DO_LOGIN, DOREGISTER
+from .steps.login import Login
 
 
 @pytest.mark.login
