@@ -12,14 +12,9 @@ jobs:
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
       - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - run:
           name: run tests
           command: |
             set -e
-            source .venv/bin/activate
             python run.py test
 
 workflows:
