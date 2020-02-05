@@ -4,16 +4,23 @@ jobs:
     working_directory: ~/users
     docker:
       - image: circleci/python:3.7.2
+        environment: # environment variables for primary container
+          PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run: echo "Run tests"
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
       - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - run:
           name: run tests
           command: |
-            set +e
-            python run.py test
+            set -e
+            source venv/bin/activate
+            pipenv run python run.py test
 
 workflows:
   version: 2
