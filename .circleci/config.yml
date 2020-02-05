@@ -8,7 +8,7 @@ jobs:
       - run: echo "Run tests"
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
-      - run: run.py
+      - run: python run.py
   two:
     docker:
       - image: circleci/python:3.7.2
