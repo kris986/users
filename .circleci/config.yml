@@ -14,13 +14,22 @@ jobs:
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
       - run:
+          command: |  # use pipenv to install dependencies
+            sudo pip install pipenv
+            pipenv install
+      - run:
           name: run tests
           command: |
             set -e
-            python run.py tests
-      - store_test_results:
-          path: ~/tmp/test-results
+            . venv/bin/activate
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
 
+            - store_test_results:
+                path: test-results
+
+            - store_artifacts:
+                path: test-results
 workflows:
   version: 2
   tests:
