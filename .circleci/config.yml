@@ -13,7 +13,6 @@ jobs:
           name: run tests
           command: |
             set -e
-            source venv/bin/activate
             python run.py test
 
 workflows:
