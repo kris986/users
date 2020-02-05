@@ -15,7 +15,7 @@ jobs:
           name: run tests
           command: |
             set -e
-            python run.py run_tests
+            python run.py tests
 
 workflows:
   version: 2
