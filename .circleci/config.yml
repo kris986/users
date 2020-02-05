@@ -14,19 +14,11 @@ jobs:
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
       - run:
-          command: |  # use pipenv to install dependencies
-            sudo pip install pipenv
-            pipenv install
-      - run:
           name: run tests
           command: |
+            sudo mkdir test-results
             set -e
-#            .venv/bin/activate
-            mkdir test-results
             pipenv run python run.py test
-
-      #            pytest --junitxml=test-results/junit.xml
-
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
