@@ -13,8 +13,6 @@ jobs:
       - run: echo "Run tests"
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
-      - run: make tests
-      - run: run tests
       - run: pytest tests
       - run:
           name: run tests
