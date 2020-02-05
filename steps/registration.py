@@ -47,8 +47,3 @@ class Registration(BaseMethod):
         assert 'type' in response_result, 'There is not requared type field'
         assert response_result['type'] == 'error', 'Error IS NOT arise, but it must'
         assert non_unique_field in response_result['message'], 'There IS NOT details in the Error message'
-
-        # {
-        #     "type": "error",
-        #     "message": " email 11.08.2019-23-06-59@test.test уже есть в базе"
-        # }
