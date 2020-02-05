@@ -1,6 +1,7 @@
 version: 2
 jobs:
   run_tests:
+    working_directory: ~/users
     docker:
       - image: circleci/python:3.7.2
     steps:
@@ -9,15 +10,8 @@ jobs:
       - run: pip install --user --upgrade pip
       - run: pip install --user -r requirements.txt
       - run: python run.py
-  two:
-    docker:
-      - image: circleci/python:3.7.2
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - run: sleep 10
 workflows:
   version: 2
-  one_and_two:
+  tests:
     jobs:
       - run_tests
