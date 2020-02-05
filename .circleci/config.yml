@@ -16,7 +16,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            sudo mkdir test-results
+            mkdir test-results
             set -e
             python run.py test
 #      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
