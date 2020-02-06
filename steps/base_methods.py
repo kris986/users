@@ -23,7 +23,7 @@ class BaseMethod:
         return user_data
 
     def should_be_status_code_200(self, result):
-        assert result.status_code == 201, 'Status code IS NOT 200 ok'
+        assert result.status_code == 200, 'Status code IS NOT 200 ok'
 
     def should_be_status_code_401(self, result):
         assert result.status_code == 401, 'Status code IS NOT 401'
