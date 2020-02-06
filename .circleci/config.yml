@@ -1,39 +1,3 @@
-#version: 2
-#jobs:
-#  tests:
-#    description: "Run tests"
-#    working_directory: ~/users
-#    docker:
-#
-#      - image: circleci/python:3.7.2
-#        environment: # environment variables for primary container
-#          PIPENV_VENV_IN_PROJECT: true
-#    steps:
-#      - checkout
-#      - run: pip install --user --upgrade pip
-#      - run: pip install --user -r requirements.txt
-#      - run:
-#          name: tests
-#          command: |
-#            mkdir test-results
-#            set -e
-#            pytest -s --tb=line tests
-##            python run.py tests
-#      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-#          path: test-results
-#      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-#          path: test-results
-#          destination: tr1
-#workflows:
-#  version: 2
-#  run_tests:
-#    jobs:
-#      - tests
-
-# Python CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-python/ for more details
-#
 version: 2
 jobs:
   build:
