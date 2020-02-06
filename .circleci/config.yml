@@ -80,7 +80,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python run.py test
+            pytest -s --tb=line --junitxml=test-results/junit.xml tests
             echo $?
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
