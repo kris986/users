@@ -6,7 +6,6 @@ from ..set_urls import DOREGISTER
 
 
 class TestRegistration:
-
     registration = Registration(DOREGISTER)
 
     def test_registration_valid_data(self):
