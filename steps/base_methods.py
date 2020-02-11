@@ -8,8 +8,8 @@ class BaseMethod:
     def __init__(self, method):
         self.method = method
 
-    def api_path(self, method):
-        method_url = urljoin(API_URL, method)
+    def api_path(self):
+        method_url = urljoin(API_URL, self.method)
         return method_url
 
     def generator_user_data(self):
