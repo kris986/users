@@ -4,7 +4,7 @@ from users.set_urls import DOREGISTER
 from users.steps.registration import Registration
 
 
-@pytest.fixture()
+@pytest.fixture(scope='class')
 def creating_new_user():
     registration = Registration(DOREGISTER)
     user_data = registration.generator_user_data()
