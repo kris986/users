@@ -4,4 +4,4 @@ import pytest
 from pytest import ExitCode
 
 
-pytest.main(['-s', '--tb=line', '--junitxml=test-results/junit.xml', 'tests'])
+pytest.main(['--setup-show', '-s', '--tb=line', '--junitxml=test-results/junit.xml', 'tests'])
