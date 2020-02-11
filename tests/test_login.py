@@ -9,8 +9,7 @@ from ..steps.login import Login
 
 @pytest.mark.login
 class TestLogin:
-    method = DO_LOGIN
-    login = Login(method)
+    login = Login(DO_LOGIN)
 
     @pytest.fixture(autouse=True)
     def setup(self):

@@ -8,7 +8,7 @@ from ..set_urls import DO_LOGIN
 class Login(BaseMethod):
 
     def sent_login_request(self, email, password):
-        result = requests.post(self.api_path(DO_LOGIN), data={
+        result = requests.post(self.api_path(), data={
             'email': email,
             'password': password
         })
