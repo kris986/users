@@ -26,3 +26,10 @@ class TestLogin:
         response = self.login.sent_login_request(wrong_user_email, creating_new_user['password'])
         self.login.should_be_status_code_200(response)
         self.login.should_be_text_result_false(response)
+
+    def test_login_invalid_credentials(self, creating_new_user):
+        wrong_user_email = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f") + '@test.test'
+        wrong_passwrd = datetime.now().strftime("Hello%d%m%Y-%H-%M-%S-%f")
+        response = self.login.sent_login_request(wrong_user_email, wrong_passwrd)
+        self.login.should_be_status_code_200(response)
+        self.login.should_be_text_result_false(response)
