@@ -1,5 +1,7 @@
 import json
 
+import allure
+
 from .base_methods import BaseMethod
 import requests
 from ..set_urls import DOREGISTER
@@ -7,6 +9,7 @@ from ..set_urls import DOREGISTER
 
 class Registration(BaseMethod):
 
+    @allure.step(title='Sending POST request for Registration')
     def sent_registration_request(self, email, password, name):
         result = requests.post(self.api_path(), data={
             "email": email,
@@ -15,11 +18,12 @@ class Registration(BaseMethod):
         })
         return result
 
-    def should_be_full_answer(self, response_data):
+    def should_be_full_answer(self, response):
         pass
-        response_result = json.loads(response_data.text)
+        response_result = json.loads(response.text)
         assert response_result['name'] is True, 'Name of new user IS NOT correct'
 
+    @allure.step(title='Checking response body [Registration]')
     def should_be_requare_fields_response_body(self, response, posted_user_email, posted_user_name):
         response_result = json.loads(response.text)
         assert response_result['name'] == posted_user_name, 'Name of new user IS NOT correct'
@@ -32,6 +36,7 @@ class Registration(BaseMethod):
         assert response_result['date_start'] == 0, 'Name of new user IS NOT correct'
         assert response_result['hobby'] == '', 'Name of new user IS NOT correct'
 
+    @allure.step(title='Checking response body [Registration | non unique field]')
     def should_be_error_msg_non_unique_field(self, response, non_unique_field):
         response_result = json.loads(response.text)
         assert 'type' in response_result, 'There is not requared type field'

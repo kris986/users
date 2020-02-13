@@ -1,12 +1,14 @@
 import json
 
+import allure
+
 from .base_methods import BaseMethod
 import requests
-from ..set_urls import DO_LOGIN
 
 
 class Login(BaseMethod):
 
+    @allure.step
     def sent_login_request(self, email, password):
         result = requests.post(self.api_path(), data={
             'email': email,
