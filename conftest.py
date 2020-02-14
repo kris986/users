@@ -17,4 +17,4 @@ def creating_new_user():
     registration.sent_registration_request(email=user_data['user_email'],
                                            password=user_data['password'],
                                            name=user_data['user_name'])
-    return user_data
+    yield user_data
