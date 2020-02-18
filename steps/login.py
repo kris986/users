@@ -7,19 +7,20 @@ import requests
 
 
 class Login(BaseMethod):
+    response = None
 
     @allure.step
     def sent_login_request(self, email, password):
-        result = requests.post(self.api_path(), data={
+        self.response = requests.post(self.api_path(), data={
             'email': email,
             'password': password
         })
-        return result
+        return self.response
 
-    def should_be_text_result_true(self, response_data):
-        response_result = json.loads(response_data.text)
+    def should_be_text_result_true(self):
+        response_result = json.loads(self.response.text)
         assert response_result['result'] is True, 'Result of response IS NOT "true"'
 
-    def should_be_text_result_false(self, response_data):
-        response_result = json.loads(response_data.text)
+    def should_be_text_result_false(self):
+        response_result = json.loads(self.response.text)
         assert response_result['result'] is False, 'Result of response IS NOT "false"'
