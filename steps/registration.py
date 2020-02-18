@@ -1,27 +1,30 @@
 import json
 
-from .base_methods import BaseMethod
+import allure
 import requests
-from ..set_urls import DOREGISTER
+
+from .base_methods import BaseMethod
 
 
 class Registration(BaseMethod):
+    response = None
 
+    @allure.step(title='Sending POST request for Registration')
     def sent_registration_request(self, email, password, name):
-        result = requests.post(self.api_path(), data={
+        self.response = requests.post(self.api_path(), data={
             "email": email,
             "password": password,
             "name": name
         })
-        return result
+        return self.response
 
-    def should_be_full_answer(self, response_data):
-        pass
-        response_result = json.loads(response_data.text)
+    def should_be_full_answer(self):
+        response_result = json.loads(self.response.text)
         assert response_result['name'] is True, 'Name of new user IS NOT correct'
 
-    def should_be_requare_fields_response_body(self, response, posted_user_email, posted_user_name):
-        response_result = json.loads(response.text)
+    @allure.step(title='Checking response body [Registration]')
+    def should_be_required_fields_response_body(self, posted_user_email, posted_user_name):
+        response_result = json.loads(self.response.text)
         assert response_result['name'] == posted_user_name, 'Name of new user IS NOT correct'
         assert response_result[
                    'avatar'] == 'http://users.bugred.ru//tmp/default_avatar.jpg', 'Name of new user IS NOT correct'
@@ -32,8 +35,9 @@ class Registration(BaseMethod):
         assert response_result['date_start'] == 0, 'Name of new user IS NOT correct'
         assert response_result['hobby'] == '', 'Name of new user IS NOT correct'
 
-    def should_be_error_msg_non_unique_field(self, response, non_unique_field):
-        response_result = json.loads(response.text)
+    @allure.step(title='Checking response body [Registration | non unique field]')
+    def should_be_error_msg_non_unique_field(self, non_unique_field):
+        response_result = json.loads(self.response.text)
         assert 'type' in response_result, 'There is not requared type field'
         assert response_result['type'] == 'error', 'Error IS NOT arise, but it must'
         assert non_unique_field in response_result['message'], 'There IS NOT details in the Error message'
