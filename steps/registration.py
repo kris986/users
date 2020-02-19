@@ -7,7 +7,6 @@ from .base_methods import BaseMethod
 
 
 class Registration(BaseMethod):
-    response = None
 
     @allure.step(title='Sending POST request for Registration')
     def sent_registration_request(self, email, password, name):

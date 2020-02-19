@@ -8,8 +8,9 @@ from users.set_urls import API_URL
 
 
 class BaseMethod:
+    response = None
+
     def __init__(self, method):
-        self.response = None
         self.method = method
 
     def api_path(self):

@@ -7,10 +7,9 @@ import requests
 
 
 class Login(BaseMethod):
-    response = None
 
     @allure.step
-    def sent_login_request(self, email, password):
+    def send_login_request(self, email, password):
         self.response = requests.post(self.api_path(), data={
             'email': email,
             'password': password
