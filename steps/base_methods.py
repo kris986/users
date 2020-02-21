@@ -4,6 +4,8 @@ import allure
 from datetime import datetime
 from urllib.parse import urljoin
 
+import requests
+
 from users.set_urls import API_URL
 
 
@@ -16,6 +18,11 @@ class BaseMethod:
     def api_path(self):
         method_url = urljoin(API_URL, self.method)
         return method_url
+
+    @allure.step
+    def post_request(self, **kwargs):
+        self.response = requests.post(self.api_path(), **kwargs)
+        return self.response
 
     @allure.step
     def generator_user_data(self):

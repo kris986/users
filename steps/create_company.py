@@ -3,10 +3,14 @@ import json
 import allure
 import requests
 
+from users.set_urls import CREATE_COMPANY
 from users.steps.base_methods import BaseMethod
 
 
 class CreateCompany(BaseMethod):
+
+    def __init__(self, method=CREATE_COMPANY):
+        self.method = method
 
     @allure.step
     def sent_create_company_request(self, company_name, company_type, company_users, email_owner):

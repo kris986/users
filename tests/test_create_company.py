@@ -3,14 +3,13 @@ from datetime import datetime
 
 import pytest
 
-from ..set_urls import CREATE_COMPANY
 from ..steps.create_company import CreateCompany
 
 gen_unique_part = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f")
 
 
 class TestCreateCompany:
-    create_company = CreateCompany(CREATE_COMPANY)
+    create_company = CreateCompany()
 
     @pytest.mark.xfail(reason='There is bug in API')
     @pytest.mark.parametrize('company_type', ['ИП', 'ООО', 'ОАО'])

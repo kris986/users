@@ -1,9 +1,8 @@
-from ..set_urls import DOREGISTER
 from ..steps.registration import Registration
 
 
 class TestRegistration:
-    registration = Registration(DOREGISTER)
+    registration = Registration()
 
     def test_registration_valid_data(self):
         user_data = self.registration.generator_user_data()
