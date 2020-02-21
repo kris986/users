@@ -3,8 +3,8 @@ import json
 import allure
 import requests
 
-from users.set_urls import CREATE_COMPANY
-from users.steps.base_methods import BaseMethod
+from ..set_urls import CREATE_COMPANY
+from ..steps.base_methods import BaseMethod
 
 
 class CreateCompany(BaseMethod):

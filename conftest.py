@@ -3,8 +3,8 @@ from datetime import datetime
 import allure
 import pytest
 
-from users.set_urls import DOREGISTER
-from users.steps.registration import Registration
+from .set_urls import DOREGISTER
+from .steps.registration import Registration
 
 gen_unique_part = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f")
 

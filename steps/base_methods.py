@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from users.set_urls import API_URL
+from ..set_urls import API_URL
 
 
 class BaseMethod:
