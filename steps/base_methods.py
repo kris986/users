@@ -21,7 +21,7 @@ class BaseMethod:
 
     @allure.step
     def post_request(self, **kwargs):
-        self.response = requests.post(self.api_path(), **kwargs)
+        self.response = requests.post(self.api_path(), verify=False,  **kwargs)
         return self.response
 
     @allure.step

@@ -7,7 +7,7 @@ from ..steps.login import Login
 
 @pytest.mark.login
 class TestLogin:
-    
+
     login = Login()
 
     def test_login_valid_credentials(self, creating_new_user):
