@@ -1,20 +1,13 @@
 import json
 
-import allure
-
 from .base_methods import BaseMethod
-import requests
+from ..set_urls import DO_LOGIN
 
 
 class Login(BaseMethod):
 
-    @allure.step
-    def send_login_request(self, email, password):
-        self.response = requests.post(self.api_path(), data={
-            'email': email,
-            'password': password
-        })
-        return self.response
+    def __init__(self, method=DO_LOGIN):
+        self.method = method
 
     def should_be_text_result_true(self):
         response_result = json.loads(self.response.text)

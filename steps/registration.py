@@ -4,9 +4,13 @@ import allure
 import requests
 
 from .base_methods import BaseMethod
+from ..set_urls import DOREGISTER
 
 
 class Registration(BaseMethod):
+
+    def __init__(self, method=DOREGISTER):
+        self.method = method
 
     @allure.step(title='Sending POST request for Registration')
     def sent_registration_request(self, email, password, name):
