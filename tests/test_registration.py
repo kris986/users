@@ -1,6 +1,9 @@
+import pytest
+
 from ..steps.registration import Registration
 
 
+@pytest.mark.registration
 class TestRegistration:
     registration = Registration()
 
@@ -10,18 +13,22 @@ class TestRegistration:
                                                     password=user_data['password'],
                                                     name=user_data['user_name'])
         self.registration.should_be_status_code_200()
+        self.registration.should_be_valid_json_schema()
         self.registration.should_be_required_fields_response_body(user_data['user_email'],
                                                                   user_data['user_name'])
 
     def test_fail_registration_with_duplicate_email(self):
+        # GIVEN: registration new user & defining user_email_for_reuse
         user_data = self.registration.generator_user_data()
         user_email_for_reuse = user_data['user_email']
         self.registration.sent_registration_request(email=user_email_for_reuse,
                                                     password=user_data['password'],
                                                     name=user_data['user_name'])
         self.registration.should_be_status_code_200()
+        self.registration.should_be_valid_json_schema()
         self.registration.should_be_required_fields_response_body(posted_user_email=user_email_for_reuse,
                                                                   posted_user_name=user_data['user_name'])
+        # THEN: Trying to registry user with email from GIVEN (var user_email_for_reuse)
         user_data = self.registration.generator_user_data()
         self.registration.sent_registration_request(email=user_email_for_reuse,
                                                     password=user_data['password'],
@@ -36,6 +43,7 @@ class TestRegistration:
                                                     password=user_data['password'],
                                                     name=user_name_for_reuse)
         self.registration.should_be_status_code_200()
+        self.registration.should_be_valid_json_schema()
         self.registration.should_be_required_fields_response_body(posted_user_email=user_data['user_email'],
                                                                   posted_user_name=user_name_for_reuse)
         user_data = self.registration.generator_user_data()
