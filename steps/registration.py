@@ -9,8 +9,9 @@ from ..set_urls import DOREGISTER
 
 class Registration(BaseMethod):
 
-    def __init__(self, method=DOREGISTER):
+    def __init__(self, method=DOREGISTER, schema_filename='registration.json'):
         self.method = method
+        self.schema_filename = schema_filename
 
     @allure.step(title='Sending POST request for Registration')
     def sent_registration_request(self, email, password, name):
