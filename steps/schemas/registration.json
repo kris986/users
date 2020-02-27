@@ -1,0 +1,98 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Registration response",
+  "required": [
+    "name",
+    "avatar",
+    "password",
+    "birthday",
+    "email",
+    "gender",
+    "date_start",
+    "hobby"
+  ],
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The Name Schema",
+      "default": "",
+      "examples": [
+        " Машенька"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "avatar": {
+      "$id": "#/properties/avatar",
+      "type": "string",
+      "title": "The user Avatar",
+      "default": "",
+      "examples": [
+        "http://users.bugred.ru//tmp/default_avatar.jpg"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "password": {
+      "$id": "#/properties/password",
+      "type": "string",
+      "title": "The user Password",
+      "default": "",
+      "examples": [
+        "4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "birthday": {
+      "$id": "#/properties/birthday",
+      "type": "integer",
+      "title": "The user Birthday",
+      "default": 0,
+      "examples": [
+        "Дата рождения в формате дд.мм.гггг"
+      ]
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "type": "string",
+      "format": "email",
+      "title": "The Email Schema",
+      "default": "",
+      "examples": [
+        "milli@mail.ru"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "gender": {
+      "$id": "#/properties/gender",
+      "type": "string",
+      "title": "The Gender Schema",
+      "default": "",
+      "examples": [
+        "m",
+        "f"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "date_start": {
+      "$id": "#/properties/date_start",
+      "type": "integer",
+      "title": "The Date_start in company",
+      "default": 0,
+      "examples": [
+        "Начал работать в компании (в формате дд.мм.гггг)"
+      ]
+    },
+    "hobby": {
+      "$id": "#/properties/hobby",
+      "type": "string",
+      "title": "The user Hobby",
+      "default": "",
+      "examples": [
+        "my dogs"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}

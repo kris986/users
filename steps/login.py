@@ -1,10 +1,18 @@
+import json
+
 from .base_methods import BaseMethod
+from ..set_urls import DO_LOGIN
 
 
 class Login(BaseMethod):
-    
-    def login_with_valid_credentials(self, user_name, password):
-        pass
 
-    def should_be_status_code_200(self):
-        pass
+    def __init__(self, method=DO_LOGIN):
+        self.method = method
+
+    def should_be_text_result_true(self):
+        response_result = json.loads(self.response.text)
+        assert response_result['result'] is True, 'Result of response IS NOT "true"'
+
+    def should_be_text_result_false(self):
+        response_result = json.loads(self.response.text)
+        assert response_result['result'] is False, 'Result of response IS NOT "false"'
