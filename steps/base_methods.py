@@ -29,6 +29,7 @@ class BaseMethod:
 
     @allure.step
     def generator_user_data(self):
+        """ Generator unique user's data """
         gen_unique_part = datetime.now().strftime("%d.%m.%Y-%H-%M-%S-%f")
         user_email = f'{gen_unique_part}@test.test'
         user_name = f'Name-{gen_unique_part}'
@@ -47,7 +48,7 @@ class BaseMethod:
     def should_be_status_code_403(self):
         assert self.response.status_code == 403, 'Status code IS NOT 403'
 
-    def should_be_error_msg_for_error_field(self, error_field):
+    def should_be_error_msg_for_error_field(self, error_field: str):
         response_result = json.loads(self.response.text)
         assert 'type' in response_result, 'There is not required type field'
         assert response_result['type'] == 'error', 'Error IS NOT arise, but it should'
@@ -55,17 +56,17 @@ class BaseMethod:
 
     @allure.step
     def should_be_valid_json_schema(self):
-        assert self.json_schema_is_valid(), 'JSON scheme of response is not valid'
+        assert self._json_schema_is_valid(), 'JSON scheme of response is not valid'
 
-    def json_schema_is_valid(self):
-        schema = self.load_json_schema()
+    def _json_schema_is_valid(self) -> bool:
+        schema = self.__load_json_schema()
         try:
             validate(json.loads(self.response.text), schema)
             return True
         except ValidationError:
             return False
 
-    def load_json_schema(self):
+    def __load_json_schema(self):
         """ Loads the given schema file """
 
         relative_path = join('schemas', self.schema_filename)
