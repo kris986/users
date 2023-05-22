@@ -1,5 +1,5 @@
 pytest==5.3.5
 pytest-sugar==0.9.2
-requests==2.23.0
+requests==2.31.0
 allure-pytest==2.8.11
 jsonschema==3.2.0
